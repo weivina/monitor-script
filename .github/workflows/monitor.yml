@@ -21,8 +21,5 @@ jobs:
 
       - name: Commit data
         run: |
-          git config --global user.name "bot"
-          git config --global user.email "bot@example.com"
           git add data.txt || true
           git commit -m "update data" || true
-          git push
