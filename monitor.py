@@ -4,8 +4,9 @@ import os
 
 URL = "https://m.client.10010.com/servicequerybusiness/queryTariffNew/operateData/e7ca7fd5ae8e49a3ba0d18bedf67ec99"
 
+SCKEY = os.getenv("SCKEY")
 # PushPlus Token（你提供的）
-PUSH_TOKEN = "1e8e8597e2444a89ac33d662cb027908"
+PUSH_TOKEN = SCKEY
 
 def send(msg):
     try:
