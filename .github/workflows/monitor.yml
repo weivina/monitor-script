@@ -1,0 +1,29 @@
+name: monitor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # 每5分钟运行一次
+  workflow_dispatch:        # 支持手动运行
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v3
+
+      - name: 运行监控脚本
+        env:
+          SCKEY: ${{ secrets.SCKEY }}
+        run: |
+          pip install requests
+          python monitor.py
+
+      - name: 保存 data.txt
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.txt || true
+          git commit -m "update data" || true
+          git push
